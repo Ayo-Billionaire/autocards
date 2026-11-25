@@ -10,5 +10,21 @@
   "margin": 178,
   "text": "Before you hire someone for a task, do it yourself for a week and write down every step.\n\nIf you cannot write the steps down, a new hire cannot follow them, and neither can software.",
   "at": 1795634627
+ },
+ {
+  "id": "planted-words",
+  "lane": "opinion",
+  "ok": true,
+  "size": 80,
+  "text": "Before you hire someone for a task, do it yourself for a month and write down every step.\n\nIf you cannot write the steps down, a new hire cannot follow them, and neither can software.",
+  "at": 1795634712
+ },
+ {
+  "id": "planted-cut",
+  "lane": "opinion",
+  "ok": true,
+  "size": 80,
+  "text": "Before you hire someone for a task, do it yourself for a week and write down every step.\n\nIf you cannot write the steps down, a new hire cannot follow them, and neither can software.",
+  "at": 1795634712
  }
 ]
