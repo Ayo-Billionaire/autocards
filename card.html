@@ -1,59 +1,23 @@
 <!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=block" rel="stylesheet">
-<style>*{margin:0;padding:0;box-sizing:border-box}html,body{overflow:hidden;font-family:Inter,sans-serif}
-#s{position:relative;overflow:hidden}#in{position:absolute;left:92px;right:92px}
-.who{display:flex;align-items:center;gap:28px;margin-bottom:64px}.who img{width:136px;height:136px;border-radius:50%;border:6px solid}
-.name{font-weight:700;font-size:50px;line-height:1.15}.handle{font-size:40px}
-#t{line-height:1.27;letter-spacing:-.015em;font-weight:500}#t p{text-wrap:balance}#t p+p{margin-top:.6em}.w{display:inline-block}
-.sc{position:absolute;inset:0;overflow:hidden}.sc .bd{position:absolute;top:-30%;height:160%;width:170px;transform:skewX(-18deg)}.sc .ph{position:absolute;left:92px;right:92px;top:560px;height:860px;display:flex;align-items:center;font-weight:700;letter-spacing:-.03em;line-height:1.06}.sc .ph span{text-wrap:balance;transform-origin:0 50%}.top{position:absolute;left:92px;top:250px;display:flex;align-items:center;gap:28px;z-index:5}.top img{width:136px;height:136px;border-radius:50%;border:6px solid}
-#bar{z-index:6;position:absolute;left:0;bottom:0;height:14px;width:0}</style></head><body>
-<div id="s"><div id="in"><div class="who"><img src="avatar.png"><div><div class="name">Ayo Adesina</div><div class="handle">@ayo_deshina</div></div></div><div id="t"></div></div><div id="bar"></div></div>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&display=block" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:"DM Sans",sans-serif}
+.c{width:1080px;height:1350px;padding:0 96px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.who{display:flex;align-items:center;gap:28px;margin-bottom:60px}.who img{width:144px;height:144px;border-radius:50%;border:6px solid #fff;object-fit:cover}
+.name{font-weight:700;font-size:48px;line-height:1.15}.handle{font-weight:500;font-size:38px}
+.t{font-weight:800;line-height:1.16;letter-spacing:-.014em}.t p{text-wrap:balance}.t p+p{margin-top:.6em}</style></head><body>
+<div class="c"><div class="who"><img src="avatar.png"><div><div class="name">Ayo Adesina</div><div class="handle">@ayo_deshina</div></div></div><div class="t"></div></div>
 <script>
-const C={motivation:["#2C3456","#FFFFFF","#BCC4DB"],opinion:["#4D6AA7","#FFFFFF","#FFFFFF"],lesson:["#BCC4DB","#1C2240","#1C2240"],session:["#BCC4DB","#1C2240","#1C2240"],buyers:["#7A93C8","#1C2240","#1C2240"],builder:["#1C2240","#FFFFFF","#BCC4DB"]};
-const $=(q)=>document.querySelector(q);let words=[],paras=[];
-// Hook only for story posts: the caption carries the rest. Motivation and opinion are one whole thought.
-window.setup=async(p,video)=>{const[bg,fg,h]=C[p.lane],W=1080,H=video?1920:1350,top=video?330:140,room=H-top-(video?470:150);
- $("#s").style.cssText=`width:${W}px;height:${H}px;background:${bg};color:${fg}`;$("#in").style.top=top+"px";$(".handle").style.color=h;$(".who img").style.borderColor=fg;$("#bar").style.background=h;
- paras=p.lane==="motivation"||p.lane==="opinion"?p.text.split("\n\n"):p.text.split("\n\n").slice(0,1);
- $("#t").replaceChildren(...paras.map((x)=>{const e=document.createElement("p");x.split(" ").forEach((w,i)=>{const s=document.createElement("span");s.className="w";s.textContent=w;if(i)e.append(" ");e.append(s)});return e}));
- words=[...document.querySelectorAll(".w")];await document.fonts.load("500 80px Inter");await document.fonts.ready;
- let why=["not tried"],size=0;for(size=132;size>=64;size-=4){$("#t").style.fontSize=size+"px";why=problems(room,W,H,video,top);if(!why.length)break}
- return{ok:!why.length,why,size,words:words.length,font:document.fonts.check("500 80px Inter"),end:Math.round($("#in").getBoundingClientRect().bottom)}};
-function lines(p){const L=[];for(const w of p.querySelectorAll(".w")){const r=w.getBoundingClientRect(),l=L.at(-1);if(l&&Math.abs(l.y-r.top)<10){l.n++;l.r=r.right}else L.push({y:r.top,n:1,l:r.left,r:r.right})}return L}
-function problems(room,W,H,video,top){const b=[],box=$("#in").getBoundingClientRect();if(box.height>room)b.push("too tall");
- if(words.some((w)=>w.getBoundingClientRect().right>W-88))b.push("touches the right edge");
- const ps=[...document.querySelectorAll("#t p")].map(lines),widest=Math.max(...ps.flat().map((l)=>l.r-l.l));
- for(const L of ps)if(L.length>1&&(L.at(-1).n===1||L.at(-1).r-L.at(-1).l<.25*widest))b.push("lone word on the last line");
- if(!video&&box.bottom<.66*H&&!b.length)b.push("card is half empty");return b}
-const ease=(x)=>{x=Math.max(0,Math.min(1,x));return 1-Math.pow(1-x,3)};
-// Moving version: big phrases on brand blues, each wiping over the last, ending on the approved card.
-const G={d:["#1C2240","#2C3456","#FFFFFF"],n:["#2C3456","#1C2240","#FFFFFF"],c:["#4D6AA7","#2C3456","#FFFFFF"],s:["#7A93C8","#BCC4DB","#1C2240"],l:["#BCC4DB","#7A93C8","#1C2240"]};
-const ORDER={motivation:["n","l","c","l"],opinion:["c","l","n","l"],lesson:["l","n","s","c"],session:["l","n","s","c"],buyers:["s","n","l","c"],builder:["d","l","c","l"]};
-const SET=(x)=>new Set(x.split(" "));
-const CONJ=SET("because but and so or if when while before after until that which who what how where why than then unless although"),PREP=SET("to in on at for with from by of about into without over under through between during as"),DET=SET("a an the your my our their his her its this these those every each one no some any"),SUBJ=SET("i you we they he she it nobody somebody everyone people"),VERB=SET("is are was were be been do does did have has had can could will would should must may might cannot not");
-const norm=(x)=>x.toLowerCase().replace(/[^a-z0-9']/g,"");
-// Where a person would pause: after a comma, before a joining word, before a preposition, before a subject. Never between "the" and its noun, or before a trailing "it".
-function pause(w,i,first){const L=w[i-1],p=norm(L),n=norm(w[i]);if(/[,:;]$/.test(L))return -8;if(DET.has(p)||PREP.has(p)||p==="because"||p==="not")return 9;if(CONJ.has(p)&&!SUBJ.has(n))return 6;if(VERB.has(p))return 5;if(SUBJ.has(p))return 6;if(n==="it"||n==="them"||n==="me")return 7;
- if(CONJ.has(n))return -4;if(PREP.has(n))return n==="of"?3:-2;if(SUBJ.has(n))return -2;if(DET.has(n))return 0;if(VERB.has(n))return 2;return 4}
-function phrases(ps){const out=[];ps.forEach((p,pi)=>{const w=p.split(" "),N=w.length,best=Array(N+1).fill(Infinity),from=Array(N+1).fill(0);best[0]=0;
- for(let j=1;j<=N;j++)for(let i=Math.max(0,j-8);i<j;i++){const k=j-i,first=pi===0&&i===0,ch=w.slice(i,j).join(" ").length;if(k>(first?8:6)||ch>(first?40:34))continue;let c=best[i]+(j<N?pause(w,j):0);c+=first?Math.abs(k-5)*.9:k===1?7:Math.abs(k-4)*1.1;c+=2.2+8*w.slice(i,j-1).filter((x)=>/[,:;]$/.test(x)).length;if(c<best[j]){best[j]=c;from[j]=i}}
- const cut=[];for(let j=N;j>0;j=from[j])cut.unshift(w.slice(from[j],j).join(" "));out.push(...cut)});return out}
-let SC=[],FIN=0,DUR=0;
-window.setupMove=async(p)=>{const r=await setup(p,true);if(!r.ok)return r;const s=$("#s"),o=ORDER[p.lane],bad=[];await document.fonts.load("700 150px Inter");
- let at=0;const hd=(fg)=>{const t=document.createElement("div");t.className="top";t.innerHTML=$(".who").innerHTML;t.style.color=fg;t.querySelector("img").style.borderColor=fg;t.querySelector(".handle").style.color=fg;return t};
- SC=phrases(paras).map((t,i)=>{const k=o[i%o.length],[bg,bd,fg]=G[k],e=document.createElement("div");e.className="sc";e.style.background=bg;
-  for(let b=0;b<4;b++){const x=document.createElement("div");x.className="bd";x.style.background=bd;e.append(x)}
-  const ph=document.createElement("div");ph.className="ph";ph.style.color=fg;const sp=document.createElement("span");sp.textContent=t;ph.append(sp);e.append(ph,hd(fg));s.append(e);
-  let z=200;for(;z>=96;z-=6){ph.style.fontSize=z+"px";if(sp.scrollWidth<=896&&sp.getBoundingClientRect().width<=897&&sp.getBoundingClientRect().height<=860)break}
-  const rg=document.createRange();rg.selectNodeContents(sp);if([...rg.getClientRects()].some((q)=>q.right>1000))bad.push("phrase too wide: "+t);if(z<96)bad.push("phrase too long: "+t);
-  const d=Math.max(.95,.5+.23*t.split(" ").length),c={e,sp,at,d,fg,z,t};at+=d;return c});
- $("#in").style.zIndex=4;s.append($("#in"));s.append($("#bar"));FIN=at;DUR=at+Math.max(1.9,.8+.055*r.words);
- return{...r,ok:!bad.length,why:bad,secs:DUR,phrases:SC.map((c)=>c.t+" @"+c.z)}};
-window.seek=(t)=>{SC.forEach((c,i)=>{const on=t>=c.at-1e-6;c.e.style.visibility=on?"visible":"hidden";if(!on)return;const u=t-c.at,k=i?ease(u/.36):1,x=-18+(136*k);
-  c.e.style.clipPath=k>=1?"none":i%2?`polygon(0 0,${x+18}% 0,${x}% 100%,0 100%)`:`polygon(${100-x}% 0,100% 0,100% 100%,${82-x}% 100%)`;
-  [...c.e.querySelectorAll(".bd")].forEach((b,j)=>{const P=1840,q=((j*460+t*330)%P+P)%P;b.style.left=(q-440)+"px"});
-  const en=i?ease((u-.1)/.34):1;c.sp.style.transform=`translateX(${(1-en)*140}px) scale(${1+.05*u/c.d})`;c.sp.style.opacity=i?en:1});
- const f=t>=FIN;
- const IN=$("#in");IN.style.visibility=f?"visible":"hidden";$("#bar").style.width=100*t/DUR+"%";
- if(f){SC.forEach((c)=>c.e.style.visibility="hidden");const u=t-FIN;words.forEach((w,i)=>{const k=ease((u-.02*i)/.3);w.style.opacity=k;w.style.transform=`translateY(${(1-k)*46}px)`})}else words.forEach((w)=>{w.style.opacity=1;w.style.transform="none"})};
+// Brand blues only: ground, text, handle. One size step for every card so a feed of them looks like one set.
+const C=[["#2C3456","#FFFFFF","#BCC4DB"],["#4D6AA7","#FFFFFF","#FFFFFF"],["#BCC4DB","#1C2240","#1C2240"],["#1C2240","#FFFFFF","#BCC4DB"],["#7A93C8","#1C2240","#1C2240"]],SIZES=[80,76,72],MARGIN=110;
+const $=(q)=>document.querySelector(q);
+window.setup=async(p)=>{const[bg,fg,h]=C[p.colour%C.length],c=$(".c"),t=$(".t");c.style.background=bg;c.style.color=fg;$(".handle").style.color=h;
+ t.replaceChildren(...p.text.split("\n\n").map((x)=>{const e=document.createElement("p");e.textContent=x;return e}));
+ await document.fonts.load('800 84px "DM Sans"');await document.fonts.load('700 48px "DM Sans"');await document.fonts.ready;await $(".who img").decode();
+ let why=["not tried"],size=0;for(size of SIZES){t.style.fontSize=size+"px";why=problems();if(!why.length)break}
+ return{ok:!why.length,why,size,font:document.fonts.check('800 84px "DM Sans"'),photo:$(".who img").naturalWidth,margin:Math.round($(".who").getBoundingClientRect().top)}};
+function problems(){const b=[],c=$(".c").getBoundingClientRect(),W=$(".who").getBoundingClientRect(),t=$(".t").getBoundingClientRect();
+ if(W.top-c.top<MARGIN||c.bottom-t.bottom<MARGIN)b.push("too tall");if((t.bottom-W.top)/c.height<.42)b.push("too little on the card");
+ for(const p of document.querySelectorAll(".t p")){const r=document.createRange(),L=[];const n=p.firstChild;let i=0;for(const w of n.data.split(" ")){r.setStart(n,i);r.setEnd(n,i+w.length);i+=w.length+1;const q=r.getBoundingClientRect(),l=L.at(-1);if(q.right>c.right-90)b.push("touches the right edge");if(l&&Math.abs(l.y-q.top)<10){l.n++;l.r=q.right}else L.push({y:q.top,n:1,l:q.left,r:q.right})}
+  const wide=Math.max(...L.map((l)=>l.r-l.l));if(L.length>1&&(L.at(-1).n===1||L.at(-1).r-L.at(-1).l<.28*wide))b.push("lone word on the last line")}
+ return[...new Set(b)]}
 </script></body></html>
