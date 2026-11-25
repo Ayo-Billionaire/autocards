@@ -1,0 +1,27 @@
+[
+ {
+  "id": "sample-m1",
+  "lane": "motivation",
+  "text": "You do not have to feel like following up.\n\nOpen the message, type two lines and send it, because the customer cannot tell what mood you were in."
+ },
+ {
+  "id": "sample-l2",
+  "lane": "lesson",
+  "text": "If your AI phone assistant pauses in an odd place when it reads out an appointment name, look at the end of that name in your booking system.\n\nThere may be a blank space there that nobody can see.\n\nDelete it, because the voice can treat it as a pause."
+ },
+ {
+  "id": "sample-b2",
+  "lane": "builder",
+  "text": "You can see how much of your Claude limit you have used without typing a command.\n\nClaude Code's docs say its status line can show the percentage for the 5 hour window and the weekly one.\n\nIt appears after the first reply, on Pro, Max and Ultra."
+ },
+ {
+  "id": "sample-o2",
+  "lane": "opinion",
+  "text": "Tell your client the bad news in the same hour you find it.\n\nThey can plan around a problem, but they cannot plan around silence."
+ },
+ {
+  "id": "sample-r1",
+  "lane": "buyers",
+  "text": "I read 35 reviews that people left after buying an automation.\n\n12 praised it for working as expected on their real data, and 8 praised the builder for understanding what they needed.\n\nOnly 1 mentioned an alert for when something fails."
+ }
+]

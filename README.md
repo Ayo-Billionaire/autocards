@@ -1,0 +1,1 @@
+Renders text cards.
