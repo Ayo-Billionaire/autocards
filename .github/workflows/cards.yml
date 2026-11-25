@@ -1,6 +1,7 @@
 name: cards
 on:
   workflow_dispatch: {}
+  push: { paths: [card.html, render.py, sample.json, .github/workflows/cards.yml] }
 permissions: { contents: read }
 concurrency: { group: cards }
 jobs:
