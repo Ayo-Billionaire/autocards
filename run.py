@@ -16,5 +16,6 @@ rep=[x for x in rep if time.time()-x["at"]<=21*86400]
 (O/"report.json").write_text(json.dumps(rep,indent=1,ensure_ascii=False))
 (O/"seen.json").write_text(json.dumps({k:v for k,v in seen.items() if any(r["id"]==k for r in rep)},indent=1))
 s=get("/meta/status");bad=[r["id"] for r in rep if r["ok"] and r["id"] not in seen and time.time()-r["at"]>30*3600]
-prob=list(s["problems"])+([f"{len(bad)} card(s) drawn over 30 hours ago and nobody looked: {bad[:3]}"] if bad and s["on"] else [])
+START=1795824000 # 28 Nov 2026 00:00 UTC: until then few bookings are normal, the lane is new
+prob=[p for p in s["problems"] if not (p.startswith("only") and time.time()<START)]+([f"{len(bad)} card(s) drawn over 30 hours ago and nobody looked: {bad[:3]}"] if bad and s["on"] else [])
 (O/"alert.json").write_text(json.dumps(prob));print("plan",len(plan),"drawn",len(todo),"problems",prob)
